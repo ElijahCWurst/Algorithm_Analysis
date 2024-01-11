@@ -12,9 +12,6 @@ def factorialN(max, num = 1):
     while(math.factorial(num) <= max): num+=1
     return num-1
 
-logN = lambda a : ("2^" + str(a))
-rootN = lambda a : formatNumber(str(a**2))
-N = lambda a : formatNumber(str(a))
 nLogN = lambda a : formatNumber(str(int(math.e**lambertw(a*math.log(2, math.e)))))
 nSquared = lambda a : formatNumber(str(int(math.sqrt(a))))
 nCubed = lambda a : formatNumber(str(int(math.cbrt(a))))
@@ -23,4 +20,4 @@ exponentialN = lambda a : formatNumber(str(int(math.log2(a))))
 microSeconds = [1000000, 60*1000000, 60*60*1000000, 24*60*60*1000000, 30*24*60*60*1000000, 365*24*60*60*1000000, 100*365*24*60*60*1000000]
 labels = ["    Seconds:", "    Minutes:", "    Hours:", "    Days:", "    Months:", "    Years:", "    Centuries:"]
 print(("\n\n\n\n\n\n\n\n\n\n\n    \tlg n:\tsqrt(n):\tn:\tn lg n:\tn^2:\tn^3:\t2^n:\tn!:\n").expandtabs(22))
-for __ in range(7): print((labels[__] + "\t" + str(logN(microSeconds[__])) + "\t" + str(rootN(microSeconds[__])) + "\t" + str(N(microSeconds[__])) + "\t" + str(nLogN(microSeconds[__])) + "\t" + str(nSquared(microSeconds[__])) + "\t" + str(nCubed(microSeconds[__])) + "\t" + str(exponentialN(microSeconds[__])) + "\t" + str(factorialN(microSeconds[__])) + "\n").expandtabs(22))
+for __ in range(7): print((labels[__] + "\t" + str("2^" + str(microSeconds[__])) + "\t" + str(formatNumber(str((microSeconds[__])**2)) + "\t" + str(formatNumber(str(microSeconds[__]))) + "\t" + str(nLogN(microSeconds[__])) + "\t" + str(nSquared(microSeconds[__])) + "\t" + str(nCubed(microSeconds[__])) + "\t" + str(exponentialN(microSeconds[__])) + "\t" + str(factorialN(microSeconds[__])) + "\n").expandtabs(22)))
