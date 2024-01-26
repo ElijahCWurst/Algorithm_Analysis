@@ -3,6 +3,7 @@
 #include <string>
 #include <chrono>
 #include <iomanip>
+#include <vector>
 
 using namespace std;
 
@@ -137,23 +138,24 @@ void timeFunction(void (*func)(int*, int), string name, int size, string fileNam
 
 int main()
 {
-	const int ONE_M = 1000000;
-	const int HUNDRED_M = 100000000;
+	const int HUNDRED_K = 100000;       //should be HUNDRED_K
+	const int TEN_M = 10000000;			//should be TEN_M
 	
 	const size_t FILECOUNT = 6;
 	string files[6] = {
+		"SortedRandomNumbersLarge.txt",
+		"RandomNumbersLarge.txt",
+		"ReversedRandomNumbersLarge.txt",
 		"SortedRandomNumbersSmall.txt",
 		"RandomNumbersSmall.txt",
-		"ReversedRandomNumbersSmall.txt",
-		"SortedRandomNumbersLarge.txt",
-		"RandomNumbersLarge.txt"
-		"ReversedRandomNumbersLarge.txt",
+		"ReversedRandomNumbersSmall.txt"
 	};
 	string names[3] = { "Merge Sort", "Insertion Sort", "Bubble Sort" };
-	size_t sizes[6] = { ONE_M, ONE_M, ONE_M, HUNDRED_M, HUNDRED_M, HUNDRED_M };
+	size_t sizes[6] = { TEN_M, TEN_M, TEN_M, HUNDRED_K, HUNDRED_K, HUNDRED_K };
 	void (*sorts[3])(int*, int) = { mergeWrapper, insertionSort, bubbleSort };
 
 	//timeFunction(mergeWrapper, "Merge Sort", HUNDRED_M, "../Data/RandomNumbersLarge.txt");
+	//timeFunction(sorts[0], "Merge Sort", TEN_M, "../Data/RandomNumbersLarge.txt");
 
 	for (size_t i = 0; i < FILECOUNT; i++)
 	{
