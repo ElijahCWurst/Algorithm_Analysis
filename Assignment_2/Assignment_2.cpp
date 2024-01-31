@@ -7,7 +7,9 @@
 
 using namespace std;
 
-void bubbleSort(int arr[], int n)
+const auto timeLimit = chrono::seconds(10);
+
+short bubbleSort(int arr[], int n)
 {
 	int i, j;
 	bool swapped;
@@ -25,8 +27,9 @@ void bubbleSort(int arr[], int n)
 		if (swapped == false)
 			break;
 	}
+	return 100;
 }
-void insertionSort(int arr[], int n)
+short insertionSort(int arr[], int n)
 {
 	int i, key, j;
 	for (i = 1; i < n; i++)
@@ -42,6 +45,7 @@ void insertionSort(int arr[], int n)
 		}
 		arr[j + 1] = key;
 	}
+	return 100;
 }
 void merge(int arr[], int l, int m, int r)
 {
@@ -120,20 +124,24 @@ void printArray(int arr[], int n)
 	}
 	cout << endl;
 }
-void mergeWrapper(int* arr, int size) {
+short mergeWrapper(int* arr, int size) {
 	mergeSort(arr, 0, size - 1);
+	return 100;
 }
-void timeFunction(void (*func)(int*, int), string name, int size, string fileName) {
+void timeFunction(short (*func)(int*, int), string name, int size, string fileName) {
 	int* arr = new int[size];
 	importFile(arr, size, fileName);
 	auto start = chrono::high_resolution_clock::now();
-	func(arr, size);
+	short precentDone = func(arr, size);
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
-
-	cout << "\t" << left << setw(21) << name + ":"
-		<< left << setw(10) << duration.count() / 1000000000.0 << "seconds" << endl;
 	delete[] arr;
+
+	cout << "\t" << left << setw(21) << name + ":" << left << setw(10);
+	if (precentDone == 100)
+		cout << duration.count() / 1000000000.0 << "seconds" << endl;
+	else
+		cout << "Timed out(" << precentDone << "%)" << endl;
 }
 
 int main()
@@ -143,16 +151,16 @@ int main()
 	
 	const size_t FILECOUNT = 6;
 	string files[6] = {
-		"SortedRandomNumbersLarge.txt",
-		"RandomNumbersLarge.txt",
-		"ReversedRandomNumbersLarge.txt",
 		"SortedRandomNumbersSmall.txt",
 		"RandomNumbersSmall.txt",
-		"ReversedRandomNumbersSmall.txt"
+		"ReversedRandomNumbersSmall.txt",
+		"SortedRandomNumbersLarge.txt",
+		"RandomNumbersLarge.txt",
+		"ReversedRandomNumbersLarge.txt"
 	};
 	string names[3] = { "Merge Sort", "Insertion Sort", "Bubble Sort" };
-	size_t sizes[6] = { TEN_M, TEN_M, TEN_M, HUNDRED_K, HUNDRED_K, HUNDRED_K };
-	void (*sorts[3])(int*, int) = { mergeWrapper, insertionSort, bubbleSort };
+	size_t sizes[6] = { HUNDRED_K, HUNDRED_K, HUNDRED_K, TEN_M, TEN_M, TEN_M };
+	short (*sorts[3])(int*, int) = { mergeWrapper, insertionSort, bubbleSort };
 
 	//timeFunction(mergeWrapper, "Merge Sort", HUNDRED_M, "../Data/RandomNumbersLarge.txt");
 	//timeFunction(sorts[0], "Merge Sort", TEN_M, "../Data/RandomNumbersLarge.txt");
