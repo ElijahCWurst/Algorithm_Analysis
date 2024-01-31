@@ -9,7 +9,7 @@ using namespace std;
 
 const auto timeLimit = chrono::seconds(10);
 
-short bubbleSort(int arr[], int n)
+short bubbleSort(int arr[], int n, chrono::high_resolution_clock::time_point time)
 {
 	int i, j;
 	bool swapped;
@@ -29,7 +29,7 @@ short bubbleSort(int arr[], int n)
 	}
 	return 100;
 }
-short insertionSort(int arr[], int n)
+short insertionSort(int arr[], int n, chrono::high_resolution_clock::time_point time)
 {
 	int i, key, j;
 	for (i = 1; i < n; i++)
@@ -124,15 +124,15 @@ void printArray(int arr[], int n)
 	}
 	cout << endl;
 }
-short mergeWrapper(int* arr, int size) {
+short mergeWrapper(int* arr, int size, chrono::high_resolution_clock::time_point time) {
 	mergeSort(arr, 0, size - 1);
 	return 100;
 }
-void timeFunction(short (*func)(int*, int), string name, int size, string fileName) {
+void timeFunction(short (*func)(int*, int, chrono::high_resolution_clock::time_point), string name, int size, string fileName) {
 	int* arr = new int[size];
 	importFile(arr, size, fileName);
 	auto start = chrono::high_resolution_clock::now();
-	short precentDone = func(arr, size);
+	short precentDone = func(arr, size, start);
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
 	delete[] arr;
@@ -153,7 +153,7 @@ struct File_Size
 struct Sorter
 {
 	string Name;
-	short (*Sort)(int*, int);
+	short (*Sort)(int*, int, chrono::high_resolution_clock::time_point);
 };
 
 int main()
@@ -171,10 +171,7 @@ int main()
 		{ "ReversedRandomNumbersLarge.txt", TEN_M }
 	};
 	string names[3] = { "Merge Sort", "Insertion Sort", "Bubble Sort" };
-	short (*sorts[3])(int*, int) = { mergeWrapper, insertionSort, bubbleSort };
-
-	//timeFunction(mergeWrapper, "Merge Sort", HUNDRED_M, "../Data/RandomNumbersLarge.txt");
-	//timeFunction(sorts[0], "Merge Sort", TEN_M, "../Data/RandomNumbersLarge.txt");
+	short (*sorts[3])(int*, int, chrono::high_resolution_clock::time_point) = { mergeWrapper, insertionSort, bubbleSort };
 
 	for (size_t i = 0; i < FILECOUNT; i++)
 	{
