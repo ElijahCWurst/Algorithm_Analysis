@@ -170,15 +170,18 @@ int main()
 		{ "RandomNumbersLarge.txt", TEN_M },
 		{ "ReversedRandomNumbersLarge.txt", TEN_M }
 	};
-	string names[3] = { "Merge Sort", "Insertion Sort", "Bubble Sort" };
-	short (*sorts[3])(int*, int, chrono::high_resolution_clock::time_point) = { mergeWrapper, insertionSort, bubbleSort };
+	Sorter sorts[3] = {
+		{ "Merge Sort", mergeWrapper },
+		{ "Insertion Sort", insertionSort },
+		{ "Bubble Sort", bubbleSort }
+	};
 
 	for (size_t i = 0; i < FILECOUNT; i++)
 	{
 		cout << files[i].Filename << ": " << endl;
 		for (size_t j = 0; j < 3; j++)
 		{
-			timeFunction(sorts[j], names[j], files[i].Size, "../Data/" + files[i].Filename);
+			timeFunction(sorts[j].Sort, sorts[j].Name, files[i].Size, "../Data/" + files[i].Filename);
 		}
 	}
 }
