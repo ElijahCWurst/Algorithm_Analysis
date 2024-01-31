@@ -144,22 +144,33 @@ void timeFunction(short (*func)(int*, int), string name, int size, string fileNa
 		cout << "Timed out(" << precentDone << "%)" << endl;
 }
 
+struct File_Size
+{
+	string Filename;
+	int Size;
+};
+
+struct Sorter
+{
+	string Name;
+	short (*Sort)(int*, int);
+};
+
 int main()
 {
 	const int HUNDRED_K = 100000;       //should be HUNDRED_K
 	const int TEN_M = 10000000;			//should be TEN_M
 	
 	const size_t FILECOUNT = 6;
-	string files[6] = {
-		"SortedRandomNumbersSmall.txt",
-		"RandomNumbersSmall.txt",
-		"ReversedRandomNumbersSmall.txt",
-		"SortedRandomNumbersLarge.txt",
-		"RandomNumbersLarge.txt",
-		"ReversedRandomNumbersLarge.txt"
+	File_Size files[6] = {
+		{ "SortedRandomNumbersSmall.txt", HUNDRED_K },
+		{ "RandomNumbersSmall.txt", HUNDRED_K },
+		{ "ReversedRandomNumbersSmall.txt", HUNDRED_K },
+		{ "SortedRandomNumbersLarge.txt", TEN_M },
+		{ "RandomNumbersLarge.txt", TEN_M },
+		{ "ReversedRandomNumbersLarge.txt", TEN_M }
 	};
 	string names[3] = { "Merge Sort", "Insertion Sort", "Bubble Sort" };
-	size_t sizes[6] = { HUNDRED_K, HUNDRED_K, HUNDRED_K, TEN_M, TEN_M, TEN_M };
 	short (*sorts[3])(int*, int) = { mergeWrapper, insertionSort, bubbleSort };
 
 	//timeFunction(mergeWrapper, "Merge Sort", HUNDRED_M, "../Data/RandomNumbersLarge.txt");
@@ -167,10 +178,10 @@ int main()
 
 	for (size_t i = 0; i < FILECOUNT; i++)
 	{
-		cout << files[i] << ": " << endl;
+		cout << files[i].Filename << ": " << endl;
 		for (size_t j = 0; j < 3; j++)
 		{
-			timeFunction(sorts[j], names[j], sizes[i], "../Data/" + files[i]);
+			timeFunction(sorts[j], names[j], files[i].Size, "../Data/" + files[i].Filename);
 		}
 	}
 }
