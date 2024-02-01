@@ -15,6 +15,10 @@ short bubbleSort(int arr[], int n, chrono::high_resolution_clock::time_point tim
 	bool swapped;
 	for (i = 0; i < n - 1; i++)
 	{
+		if (chrono::high_resolution_clock::now() - time > timeLimit)
+		{
+			return (i * 100) / n;
+		}
 		swapped = false;
 		for (j = 0; j < n - i - 1; j++)
 		{
@@ -34,6 +38,10 @@ short insertionSort(int arr[], int n, chrono::high_resolution_clock::time_point 
 	int i, key, j;
 	for (i = 1; i < n; i++)
 	{
+		if (chrono::high_resolution_clock::now() - time > timeLimit)
+		{
+			return (i * 100) / n;
+		}
 		key = arr[i];
 		j = i - 1;
 		
@@ -141,7 +149,7 @@ void timeFunction(short (*func)(int*, int, chrono::high_resolution_clock::time_p
 	if (precentDone == 100)
 		cout << duration.count() / 1000000000.0 << "seconds" << endl;
 	else
-		cout << "Timed out(" << precentDone << "%)" << endl;
+		cout << "Timed out (" << precentDone << "%)" << endl;
 }
 
 struct File_Size
@@ -162,7 +170,7 @@ int main()
 	const int TEN_M = 10000000;			//should be TEN_M
 	
 	const size_t FILECOUNT = 6;
-	File_Size files[6] = {
+	File_Size files[FILECOUNT] = {
 		{ "SortedRandomNumbersSmall.txt", HUNDRED_K },
 		{ "RandomNumbersSmall.txt", HUNDRED_K },
 		{ "ReversedRandomNumbersSmall.txt", HUNDRED_K },
