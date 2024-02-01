@@ -7,7 +7,7 @@
 
 using namespace std;
 
-const auto timeLimit = chrono::seconds(10);
+const auto timeLimit = chrono::hours(2);
 
 short bubbleSort(int arr[], int n, chrono::high_resolution_clock::time_point time)
 {
