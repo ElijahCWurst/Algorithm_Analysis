@@ -1,0 +1,30 @@
+SortedRandomNumbersSmall.txt:
+        Heap Sort:           0.0075892 seconds
+        Quick Sort:          1.68359   seconds
+        Counting Sort:       0.0008019 seconds
+        Bucket Sort:         0.004863  seconds
+RandomNumbersSmall.txt:
+        Heap Sort:           0.009531  seconds
+        Quick Sort:          0.0056747 seconds
+        Counting Sort:       0.0012144 seconds
+        Bucket Sort:         0.0085915 seconds
+ReversedRandomNumbersSmall.txt:
+        Heap Sort:           0.0063229 seconds
+        Quick Sort:          2.20959   seconds
+        Counting Sort:       0.0008456 seconds
+        Bucket Sort:         0.002244  seconds
+SortedRandomNumbersLarge.txt:
+        Heap Sort:           0.661771  seconds
+        Quick Sort:          22217.7   seconds
+        Counting Sort:       0.0851796 seconds
+        Bucket Sort:         0.528462  seconds
+RandomNumbersLarge.txt:
+        Heap Sort:           2.23425   seconds
+        Quick Sort:          0.739478  seconds
+        Counting Sort:       0.23974   seconds
+        Bucket Sort:         1.16475   seconds
+ReversedRandomNumbersLarge.txt:
+        Heap Sort:           0.691935  seconds
+        Quick Sort:          26797.8   seconds
+        Counting Sort:       0.101502  seconds
+        Bucket Sort:         0.699532  seconds
